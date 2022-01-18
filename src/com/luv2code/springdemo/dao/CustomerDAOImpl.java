@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -73,6 +74,29 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		theQuery.executeUpdate();
 		
+	}
+
+	@Override
+	public List<Customer> searchCustomers(String theSearchName) {
+		
+		// get the current hibernate session
+		Session currentSesssion = sessionFactory.getCurrentSession();
+		
+		// transform the search keyword into lower case.
+		theSearchName = theSearchName.toLowerCase();
+		
+		// create the HQL to search the given keyword in first or last name columns
+		Query theQuery = 
+				currentSesssion.createQuery("from Customer where lower(firstName) like :searchName"
+												+ " or lower(lastName) like :searchName", Customer.class);
+		
+		// set the search keyword parameter
+		theQuery.setParameter("searchName", "%" + theSearchName + "%");
+		
+		// execute the query and return to list
+		List<Customer> theCustomers = theQuery.getResultList();
+		
+		return theCustomers;
 	}
 
 }

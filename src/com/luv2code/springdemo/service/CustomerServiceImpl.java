@@ -43,4 +43,15 @@ public class CustomerServiceImpl implements CustomerService {
 		
 	}
 
+	@Override
+	@Transactional
+	public List<Customer> searchCustomers(String theSearchName) {
+		// If search keyword is null or empty, delegate call to customerDAO to return all customers.
+		if(theSearchName.trim().length() == 0 || theSearchName.equals(null)) {
+			return customerDAO.getCustomers();
+		}
+		// Else delegate the call to perform search
+		return customerDAO.searchCustomers(theSearchName);
+	}
+
 }
