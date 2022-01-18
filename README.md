@@ -13,7 +13,7 @@ GRANT ALL PRIVILEGES ON * . * TO 'springstudent'@'localhost';
 ALTER USER 'springstudent'@'localhost' IDENTIFIED WITH mysql_native_password BY 'springstudent';
 ```
 
-After that, execute the following query to create `customer table`
+After that, execute the following query to create `customer` table
 ```sql
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
@@ -25,7 +25,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 ```
 
-Finally execute this query to fill the `customer`table with initial data.
+Finally execute this query to fill the `customer` table with initial data.
 ```sql
 INSERT INTO `customer` VALUES 
 	(1,'David','Adams','david@luv2code.com'),
