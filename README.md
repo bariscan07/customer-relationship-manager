@@ -13,8 +13,11 @@ GRANT ALL PRIVILEGES ON * . * TO 'springstudent'@'localhost';
 ALTER USER 'springstudent'@'localhost' IDENTIFIED WITH mysql_native_password BY 'springstudent';
 ```
 
-After that, execute the following query to create `customer` table
+After that, execute the following query to create the database schema and `customer` table
 ```sql
+CREATE DATABASE  IF NOT EXISTS `web_customer_tracker`;
+USE `web_customer_tracker`;
+
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
